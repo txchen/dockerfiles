@@ -1,0 +1,34 @@
+version: "2"
+
+# https://docs.docker.com/compose/compose-file/compose-file-v2/#variable-substitution
+# env vars:
+#   WEBSOCKET_ENABLED, 'true' or 'false'
+#   SIGNUPS_ALLOWED, 'true' or 'false'
+#   ADMIN_TOKEN, optional, set to enable admin page
+#   BW_DATA_DIR, e.g. /opt/bitwarden/bw-data
+#   CADDY_FILE_PATTH, e.g. /opt/bitwarden/Caddyfile
+#   CADDY_CERT_DIR, the directory that contains the cert and key
+#   CADDY_HTTPS_PORT, e.g. 443
+
+services:
+  bitwarden:
+    image: bitwardenrs/server
+    restart: always
+    volumes:
+      - ${BW_DATA_DIR}:/data
+    environment:
+      ADMIN_TOKEN: "${ADMIN_TOKEN}"
+      WEBSOCKET_ENABLED: "${WEBSOCKET_ENABLED}" # Required to use websockets
+      SIGNUPS_ALLOWED: "${SIGNUPS_ALLOWED}" # set to false to disable signups
+      LOG_FILE: "/data/bitwarden.log"
+      LOG_LEVEL: "warn"
+      EXTENDED_LOGGING: "true"
+
+  caddy:
+    image: txchen/caddy:latest
+    restart: always
+    volumes:
+      - ${CADDY_FILE_PATTH}:/etc/Caddyfile:ro
+      - ${CADDY_CERT_DIR}:/etc/caddycerts:ro
+    ports:
+      - ${CADDY_HTTPS_PORT}:443
