@@ -14,4 +14,4 @@ LABEL maintainer "Tianxiang Chen <txchendev@gmail.com>"
 COPY --from=build /opt/frps /opt/frps
 
 ENTRYPOINT ["/opt/frps"]
-CMD ["--conf", "/etc/frps.ini"]
+CMD ["-c", "/etc/frps.ini"]
