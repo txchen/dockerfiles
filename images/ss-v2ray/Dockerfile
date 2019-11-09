@@ -16,11 +16,11 @@ FROM shadowsocks/shadowsocks-libev:latest
 COPY --from=build /v2ray-plugin/v2ray-plugin /usr/bin
 
 ENV SERVER_ADDR 0.0.0.0
-ENV SERVER_PORT 80
+ENV SERVER_PORT 8388
 ENV PASSWORD=
-ENV METHOD      aes-256-gcm
-ENV TIMEOUT     300
-ENV DNS_ADDRS    8.8.8.8,8.8.4.4
+ENV METHOD aes-256-gcm
+ENV TIMEOUT 300
+ENV DNS_ADDRS 8.8.8.8,8.8.4.4
 ENV ARGS=
 
 CMD exec ss-server \
