@@ -76,7 +76,7 @@ jobs:
           context: .
           file: images/camoufox/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: txchen/camoufox:latest
+          tags: ghcr.io/txchen/camoufox:latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
