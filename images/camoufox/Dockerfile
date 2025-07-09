@@ -10,5 +10,9 @@ RUN apt-get update && \
 
 RUN pip3 install camoufox[geoip]
 RUN camoufox fetch
+RUN mkdir -p /opt/camoufox
+RUN mkdir -p /data
 
-CMD ["python3", "-m", "camoufox", "server"]
+ADD startup.py /opt/camoufox/startup.py
+
+CMD ["python3", "/opt/camoufox/startup.py"]
