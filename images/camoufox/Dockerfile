@@ -12,6 +12,6 @@ RUN pip3 install camoufox[geoip]
 RUN camoufox fetch
 RUN mkdir -p /data
 
-COPY startup.py .
+COPY images/camoufox/startup.py .
 
 CMD ["python3", "startup.py"]
